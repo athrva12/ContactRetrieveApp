@@ -23,25 +23,22 @@ public class HomeActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 1: {
-                // If request is cancelled, the result arrays are empty.
+
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission granted and now can proceed
-                    // GalleryFragment galleryFragment= new GalleryFragment();
-                    //a sample method called
+
                     Intent intent = new Intent(this,MainActivity.class);
                     startActivity(intent);
                     finish();
 
                 } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+
                     Toast.makeText(HomeActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
-            // add other cases for more permissions
+
         }
     }
 }

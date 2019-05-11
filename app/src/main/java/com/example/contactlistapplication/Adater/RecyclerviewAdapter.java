@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.contactlistapplication.DetailsActivity;
-import com.example.contactlistapplication.Models.UserInfo;
+//import com.example.contactlistapplication.Models.UserInfo;
 import com.example.contactlistapplication.R;
 
 import java.io.ByteArrayOutputStream;
@@ -61,14 +61,22 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-                imagelist.get(i).compress(Bitmap.CompressFormat.PNG, 100, bStream);
-                byte[] byteArray = bStream.toByteArray();
+
+
                 Intent intent= new Intent(view.getContext(), DetailsActivity.class);
                 intent.putExtra("name",namelist.get(i));
-                intent.putExtra("image", byteArray);
+
                 intent.putExtra("email",email.get(i));
                 intent.putExtra("phone",phone_no.get(i));
+                if(imagelist.get(i)!=null)
+                {
+                    ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+                    imagelist.get(i).compress(Bitmap.CompressFormat.PNG, 100, bStream);
+                    byte[] byteArray = bStream.toByteArray();
+                    intent.putExtra("image", byteArray);
+                }else {
+                    intent.putExtra("image","");
+                }
 
                 view.getContext().startActivity(intent);
                 ((Activity)view.getContext()).finish();

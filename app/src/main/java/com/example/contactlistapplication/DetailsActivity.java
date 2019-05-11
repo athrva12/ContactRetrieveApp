@@ -20,20 +20,23 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         Intent intent=getIntent();
-        //Toast.makeText(this,intent.getStringExtra("name"),Toast.LENGTH_LONG).show();
+
         imageView= (ImageView)findViewById(R.id.detail_image);
         name=(TextView)findViewById(R.id.detail_name);
         email=(TextView)findViewById(R.id.detail_email);
         phone=(TextView)findViewById(R.id.detail_phone_no);
         linearLayout=(LinearLayout)findViewById(R.id.layout_email);
+
+        //Data fill
         name.setText(intent.getStringExtra("name"));
         Bitmap bmp;
         name.setText(intent.getStringExtra("name"));
         byte[] byteArray = intent.getByteArrayExtra("image");
-        bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         phone.setText(intent.getStringExtra("phone"));
-           if(bmp!=null)
+           if(byteArray!=null)
            {
+
+               bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
                imageView.setImageBitmap(bmp);
            }
            if(intent.getStringArrayExtra("email")==null)

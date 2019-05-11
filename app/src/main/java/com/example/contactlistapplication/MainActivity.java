@@ -15,17 +15,17 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.contactlistapplication.Adater.RecyclerviewAdapter;
-import com.example.contactlistapplication.Models.UserInfo;
+//import com.example.contactlistapplication.Models.UserInfo;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    List<UserInfo>userInfolist= new ArrayList<>();
+
     RecyclerView recyclerView;
     RecyclerviewAdapter recyclerviewAdapter;
-    UserInfo userInfo= new UserInfo();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,31 +80,22 @@ public class MainActivity extends AppCompatActivity {
                 emailAddress = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
             }
             emails.close();
-            Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, Long.parseLong(contactId));
-            Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
-            Cursor image = getContentResolver().query(photoUri,
-                    new String[] {ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
 
 
 
-            //mainActivity.onBackPressed();
-            // Toast.makeText(mainactivity, "go go go", Toast.LENGTH_SHORT).show();
-//            UserInfo info = new UserInfo();
-//
-//            info.setName(name);
-//            info.setPhone(phoneNumber);
+
+
               namelist.add(name);
               emaillist.add(emailAddress);
               phonenolist.add(phoneNumber);
               imageurl.add(openPhoto(Long.parseLong(contactId)));
 
-            //userInfolist.add(namelist);
+
 
             Log.d("curs", name + " num" + phoneNumber + " " + "mail" + emailAddress);
         }
         c.close();
-      //  Log.v("mamama",userInfolist.get(0).getName());
-       // Toast.makeText(getApplicationContext(),userInfolist.get(0).getName(),Toast.LENGTH_LONG).show();
+
 
         recyclerviewAdapter = new RecyclerviewAdapter(namelist,imageurl,emaillist,phonenolist);
         recyclerView.setAdapter(recyclerviewAdapter);
@@ -112,37 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        if(cursor.getCount()>0) {
-//            while (cursor.moveToNext()) {
-//                String phone="1";
-//                int hasphone = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
-//                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//                String Id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-//                if(hasphone>0) {
-//
-//                    Cursor cursor2 = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//                            null,
-//                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?", new String[]{Id}, null);
-//                    while (cursor2.moveToNext()) {
-//                         phone = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                        Log.e("name ", name);
-//                        Log.e("ID", phone);
-//
-//
-//                    }
-//                    userInfo.setName(name);
-//                    userInfo.setPhone(phone);
-//                    userInfolist.add(userInfo);
-//                    cursor2.close();
-//
-//                }
-//            }
-//        }
-//        cursor.close();
-
-
-
     }
+    //Retrieving Image
     public Bitmap openPhoto(long contactId) {
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
         Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
